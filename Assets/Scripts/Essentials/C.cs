@@ -130,6 +130,16 @@ public static class C
         return angleDeg;
     }
 
+    /// <summary>
+    /// Probably have to subtract 90 degrees for correct operation.
+    /// </summary>
+    public static float AngleFromDirection(Vector3 direction)
+    {
+        float angleRad = Mathf.Atan2(direction.y, direction.x);
+        float angleDeg = Mathf.Rad2Deg * angleRad;
+        return angleDeg;
+    }
+
     public static Vector2Int ToOctant(Vector2 vec)
     {
         float angle = Mathf.Atan2(vec.y, vec.x);

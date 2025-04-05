@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85188cae837fb054a9c40c450d9631f5, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 1208327885768477962, guid: 6500c4297c48fdf4d93d7cb623b1dcbb, type: 3}
+  floorPrefab: {fileID: 603861528499356766, guid: d1672196dfa7ef64d87c3e87d858c38e, type: 3}
+  ceilingPrefab: {fileID: 603861528499356766, guid: f5c0e0117f686ff4592d237ff620dcfc, type: 3}
+  torchPrefab: {fileID: 7718079595315270967, guid: 7988277f135c1814b897f16176413f63, type: 3}
+  maxIterations: 200
+  maxDistance: 10
+  enemies: 10
+  size: 100

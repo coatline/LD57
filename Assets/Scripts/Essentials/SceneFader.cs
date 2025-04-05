@@ -75,8 +75,6 @@ public class SceneFader : Singleton<SceneFader>
     {
         int buildIndex = SceneManager.GetActiveScene().buildIndex + dir;
 
-        print($"{buildIndex} {SceneManager.sceneCountInBuildSettings}");
-
         if (buildIndex >= SceneManager.sceneCountInBuildSettings)
             buildIndex = 0;
         else if (buildIndex < 0)
