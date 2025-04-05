@@ -42,7 +42,7 @@ AudioSource:
   m_GameObject: {fileID: 5200321611220690404}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4282686099568995051, guid: 514fbe030d7e62d4fb90f96471a795fe, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -137,9 +137,9 @@ AudioEchoFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5200321611220690404}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Delay: 500
+  m_Delay: 100
   m_DecayRatio: 0.5
   m_WetMix: 1
-  m_DryMix: 1
+  m_DryMix: 0.25

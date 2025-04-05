@@ -163,7 +163,7 @@ public class LevelGenerator : MonoBehaviour
                 Instantiate(level.wallPrefab, new Vector3(cell.x * cellSize, 1, cell.y * cellSize), Quaternion.identity, transform);
                 cell.wall = true;
 
-                if (Random.Range(0, 1f) < 0.25f)
+                if (Random.Range(0, 1f) < 0.1f)
                 {
                     Vector3 direction = new Vector3(rootCell.x, rootCell.y) - new Vector3(cell.x, cell.y);
                     Instantiate(level.torchPrefab, new Vector3(cell.x * cellSize, 1f, cell.y * cellSize) + (direction.normalized * (cellSize / 1.9f)), Quaternion.Euler(0, C.AngleFromDirection(direction) - 90, 0));

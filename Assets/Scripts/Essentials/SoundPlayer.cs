@@ -33,7 +33,9 @@ public class SoundPlayer : Singleton<SoundPlayer>
         audioSource.spatialBlend = spatialBlend;
         audioSource.volume = volume;
         audioSource.pitch = pitch;
-        audioSource.PlayOneShot(clip);
+        audioSource.clip = clip;
+        audioSource.Play();
+        //audioSource.PlayOneShot(clip);
 
         StartCoroutine(DelayUseAgain(audioSource, clip.length));
     }

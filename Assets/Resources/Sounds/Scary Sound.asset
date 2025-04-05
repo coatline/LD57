@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 564cf4d8b7e14794ab94124007d6671a, type: 3}
-  m_Name: Footstep
+  m_Name: Scary Sound
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 7ddf0467f648c4046b3ddc5fa48da6a9, type: 3}
+  - {fileID: 8300000, guid: 207176804ec40864db0deed61b775501, type: 3}
   pitchShiftRange: {x: 0, y: 0}

@@ -1,17 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float walkSpeed = 3f;
     [SerializeField] float sprintSpeed = 6f;
+    [SerializeField] float acceleration;
+    [SerializeField] float maxStamina;
+    [SerializeField] Image staminaBar;
     [SerializeField] Rigidbody rb;
 
+    float targetSpeed;
+    float currentSpeed;
     Vector2 moveInput;
     bool isSprinting;
+    float stamina;
 
-    public void SetIsSprinting(bool isSprinting)
+
+    private void Awake()
     {
-        this.isSprinting = isSprinting;
+        currentSpeed = walkSpeed;
+        targetSpeed = currentSpeed;
+        stamina = maxStamina;
     }
 
     public void SetMoveInput(Vector2 moveInput)
@@ -19,11 +29,35 @@ public class PlayerMovement : MonoBehaviour
         this.moveInput = moveInput;
     }
 
+    public void SetIsSprinting(bool isSprinting)
+    {
+        if (isSprinting)
+            targetSpeed = sprintSpeed;
+        else
+            targetSpeed = walkSpeed;
+
+        this.isSprinting = isSprinting;
+    }
+
     private void FixedUpdate()
     {
+        if (isSprinting)
+        {
+            stamina -= Time.deltaTime;
+
+            if (stamina <= 0)
+                SetIsSprinting(false);
+        }
+        else if (stamina < maxStamina)
+            stamina += Time.deltaTime / 6f;
+
+        staminaBar.fillAmount = stamina / maxStamina;
+
         Vector3 moveDir = transform.forward * moveInput.y + transform.right * moveInput.x;
-        float speed = isSprinting ? sprintSpeed : moveSpeed;
-        Vector3 velocity = moveDir.normalized * speed;
+
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.fixedDeltaTime * acceleration);
+
+        Vector3 velocity = moveDir.normalized * currentSpeed;
         rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
     }
 }
