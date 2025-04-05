@@ -1,0 +1,62 @@
+
+# Unity3D
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/Logs/**
+**/[Uu]ser[Ss]ettings/
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
+
+# VS/MonoDevelop generated files
+**/.vs/**
+*.csproj
+*.sln
+ExportedObj/
+.consulo/
+*.unityproj
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# Ignore all files in /UserSettings except important ones
+*/UserSettings/
+
+# Builds
+*.apk
+*.unitypackage
+*.gradle
+
+# OS 
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Other Directories
+bin/**
+music/**
+vid/**
+gfx/non-versioned/**
+gfx/screenshots/**
+gfx/gifs/**
+screenshots/**
+**/textures/non-versioned/**
+**/textures/non-versioned.meta
+*.blend1*
+
+# (this ignores the incremental compiler Logs)
