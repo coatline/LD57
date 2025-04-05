@@ -52,16 +52,37 @@ public class SceneFader : Singleton<SceneFader>
 
     public void ReloadCurrentScene(float fadeTime) => LoadNewScene(SceneManager.GetActiveScene().name, fadeTime);
 
-    public void LoadNewScene(string sceneName, float fadeTime)
+    public void LoadNewScene(string sceneName, float fadeTime = 0.25f)
+    {
+        StartLoadingScene(sceneName, fadeTime);
+    }
+
+    public void LoadNewScene(int sceneIndex, float fadeTime = 0.25f)
+    {
+        string path = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
+        string sceneName = System.IO.Path.GetFileNameWithoutExtension(path);
+        StartLoadingScene(sceneName, fadeTime);
+    }
+
+    void StartLoadingScene(string name, float fadeTime)
     {
         StopAllCoroutines();
         thisSceneImage.CrossFadeAlpha(1, fadeTime, true);
-        StartCoroutine(LoadNewSceneDelay(sceneName, fadeTime + 0f));
+        StartCoroutine(LoadNewSceneDelay(name, fadeTime + 0f));
     }
 
-    public void LoadNewScene(string sceneName)
+    public void LoadSceneInDirection(int dir)
     {
-        LoadNewScene(sceneName, 0.25f);
+        int buildIndex = SceneManager.GetActiveScene().buildIndex + dir;
+
+        print($"{buildIndex} {SceneManager.sceneCountInBuildSettings}");
+
+        if (buildIndex >= SceneManager.sceneCountInBuildSettings)
+            buildIndex = 0;
+        else if (buildIndex < 0)
+            buildIndex = SceneManager.sceneCountInBuildSettings - 1;
+
+        LoadNewScene(buildIndex);
     }
 
     IEnumerator LoadNewSceneDelay(string sceneName, float fadeTime)
