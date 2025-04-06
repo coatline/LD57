@@ -17,7 +17,7 @@ public class CutscenePlayer : MonoBehaviour
     private void DialogueSystem_SentenceStarted()
     {
         targetPosition.z += 1f;
-        targetPosition.y = character.transform.position.y;
+        targetPosition.y = 1;
 
         if (targetPosition.z == 4)
             SceneFader.I.LoadNewScene("Game");

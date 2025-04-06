@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public event System.Action<bool> SprintingChanged;
+    public event System.Action StaminaFull;
+
     [SerializeField] float walkSpeed = 3f;
     [SerializeField] float sprintSpeed = 6f;
     [SerializeField] float acceleration;
@@ -37,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
             targetSpeed = walkSpeed;
 
         this.isSprinting = isSprinting;
+        SprintingChanged?.Invoke(isSprinting);
     }
 
     private void FixedUpdate()
@@ -50,6 +54,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (stamina < maxStamina)
             stamina += Time.deltaTime / 6f;
+        else if (stamina > maxStamina)
+        {
+            stamina = maxStamina;
+            StaminaFull?.Invoke();
+        }
 
         staminaBar.fillAmount = stamina / maxStamina;
 

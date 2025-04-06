@@ -14,9 +14,9 @@ public class FirstPersonCamera : MonoBehaviour
 
     Vector2 currentLookingPosition;
     Vector2 smoothedVelocity;
+    Vector2 inputValues;
 
-
-    public void RotateCamera(Vector2 inputValues)
+    public void SetInputValues(Vector2 inputValues)
     {
         inputValues = Vector2.Scale(inputValues, new Vector2(smoothing * lookSensitivity, smoothing * lookSensitivity));
 
@@ -30,5 +30,10 @@ public class FirstPersonCamera : MonoBehaviour
 
         cam.transform.localRotation = Quaternion.AngleAxis(-currentLookingPosition.y, Vector3.right);
         playerMesh.localRotation = Quaternion.AngleAxis(currentLookingPosition.x, transform.up);
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 }

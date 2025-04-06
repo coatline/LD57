@@ -7,13 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] FirstPersonCamera firstPersonCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Transform playerCamera;
+    [SerializeField] PlayerInput playerInput;
 
-    [Header("Settings")]
-
-    private Vector2 lookInput;
-    private float xRotation;
-
-    private bool isSprinting;
+    Vector2 lookInputs;
 
     void Awake()
     {
@@ -28,13 +24,23 @@ public class PlayerController : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext ctx)
     {
-        isSprinting = ctx.ReadValueAsButton();
-        playerMovement.SetIsSprinting(isSprinting);
+        playerMovement.SetIsSprinting(ctx.ReadValueAsButton());
     }
 
     public void OnLook(InputAction.CallbackContext ctx)
     {
-        lookInput = ctx.ReadValue<Vector2>();
+        if (Cursor.visible || Cursor.lockState != CursorLockMode.Locked)
+            return;
+
+        if (playerInput.currentControlScheme == "Keyboard&Mouse")
+        {
+            firstPersonCamera.SetInputValues(ctx.ReadValue<Vector2>() * Time.deltaTime);
+            lookInputs = Vector2.zero;
+        }
+        else
+        {
+            lookInputs = ctx.ReadValue<Vector2>();
+        }
     }
 
     public void OnPause(InputAction.CallbackContext ctx)
@@ -43,18 +49,8 @@ public class PlayerController : MonoBehaviour
             PauseMenu.I.TogglePause();
     }
 
-    void LateUpdate()
+    private void FixedUpdate()
     {
-        if (Cursor.lockState != CursorLockMode.Locked || Cursor.visible)
-            return;
-
-        firstPersonCamera.RotateCamera(lookInput);
-        //// Rotate horizontally (yaw)
-        //transform.Rotate(Vector3.up * lookInput.x * lookSensitivity);
-
-        //// Rotate camera vertically (pitch)
-        //xRotation -= lookInput.y * lookSensitivity;
-        //xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
-        //playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        firstPersonCamera.SetInputValues(lookInputs * Time.fixedDeltaTime);
     }
 }

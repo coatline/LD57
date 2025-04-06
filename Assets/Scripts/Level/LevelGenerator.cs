@@ -3,6 +3,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] PlayerController playerPrefab;
+    [SerializeField] Wellivator wellivatorPrefab;
     [SerializeField] LevelSO firstLevel;
     [SerializeField] float cellSize;
 
@@ -27,28 +28,35 @@ public class LevelGenerator : MonoBehaviour
                 map[x, y] = new Cell() { x = x, y = y };
             }
 
-        snakePosition = new Vector2Int(level.size / 2, level.size / 2);
-        Vector2Int playerPosition = snakePosition;
+        Vector2Int startPosition = new Vector2Int(level.size / 2, 1);
+        Vector2Int secondPosition = -Vector2Int.one;
+        snakePosition = startPosition;
         int iterations = 0;
 
         while (iterations++ < level.maxIterations)
         {
+
             Vector2Int prevSnakePos = snakePosition;
 
             MoveSnake();
 
             if ((snakePosition.x > 1 && snakePosition.x < level.size - 1 && snakePosition.y > 1 && snakePosition.y < level.size - 1) == false)
             {
-                playerPosition = prevSnakePos;
-                snakePosition = prevSnakePos;
+                snakePosition = startPosition;
+                //snakePosition = prevSnakePos;
                 //snakePosition = new Vector2Int(level.size / 2, level.size / 2);
             }
+            else if (secondPosition == -Vector2Int.one)
+                secondPosition = snakePosition;
         }
 
         FillLevel();
 
-        PlayerController p = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        p.transform.GetChild(0).position = new Vector3(playerPosition.x, 0, playerPosition.y) * cellSize;
+        Vector3 direction = new Vector3(secondPosition.x, secondPosition.y) - new Vector3(startPosition.x, startPosition.y);
+        Wellivator wellivator = Instantiate(wellivatorPrefab, new Vector3(startPosition.x * cellSize, 0, startPosition.y * cellSize), Quaternion.Euler(0, C.AngleFromDirection(direction) + 180, 0));
+
+        //PlayerController p = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        //p.transform.GetChild(0).position = new Vector3(startPosition.x, 0, startPosition.y) * cellSize;
     }
 
     void MoveSnake()
@@ -71,7 +79,12 @@ public class LevelGenerator : MonoBehaviour
             }
 
             int neighborCount = 4 - GetFloorNeighborCount(c);
-            float weight = (neighborCount * 200) + 1;
+            float weight = (neighborCount * 2) + 1;
+
+            if (i == 0)
+                weight *= 2;
+            else if (i == 1 || i == 2)
+                weight *= 1.25f;
 
             weightedNeighbors[i] = weight;
             totalWeight += weight;
@@ -122,11 +135,6 @@ public class LevelGenerator : MonoBehaviour
 
         return count;
     }
-
-
-    //int GetNeighbors(Cell cell)
-    //{
-    //}
 
     void FillLevel()
     {

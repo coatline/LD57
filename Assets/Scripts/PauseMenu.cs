@@ -18,18 +18,18 @@ public class PauseMenu : Singleton<PauseMenu>
     void Pause()
     {
         visuals.SetActive(true);
-        //Cursor.visible = true;
-        //Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
+        IsPaused = true;
         Paused?.Invoke();
     }
 
     void Resume()
     {
         visuals.SetActive(false);
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
+        IsPaused = false;
         Resumed?.Invoke();
     }
+
+    public bool IsPaused { get; private set; }
 }
