@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Transform playerCamera;
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] FirstPersonInteractor interactor;
+    [SerializeField] Jumper jumper;
 
     Vector2 lookInputs;
 
@@ -15,6 +17,18 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+            jumper.TryJump();
+    }
+
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+            interactor.TryInteract();
     }
 
     public void OnMove(InputAction.CallbackContext ctx)

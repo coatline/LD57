@@ -4,9 +4,11 @@ public class GemStone : MonoBehaviour, IInteractable
 {
     public bool CanInteract() => true;
 
-    public void Interact()
+    public void Interact(Interactor interactor)
     {
+        interactor.ObjectHolder.PickupItem(gameObject);
         LevelManager.I.GrabbedGemStone();
-        Destroy(gameObject);
     }
+
+    public string InteractText => "take";
 }
