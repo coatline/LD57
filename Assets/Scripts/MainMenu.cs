@@ -31,4 +31,9 @@ public class MainMenu : MonoBehaviour
         SoundPlayer.I.PlaySound(playSound, transform.position, 1, 0);
         SceneFader.I.LoadNewScene("Menu");
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

@@ -1375,7 +1375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPitchLimit: 60
-  lookSensitivity: 1
+  lookSensitivity: 1.5
   smoothing: 2
   playerMesh: {fileID: 6083220837989626960}
   cam: {fileID: 1156746188394730404}

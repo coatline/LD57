@@ -69,7 +69,6 @@ public class DialogueUI : MonoBehaviour
     {
         nextCharTimer.Timer = 0;
         currentCharDelay = charDelay / 4f;
-        currentCharDelay /= 4f;
     }
 
     private void Update()

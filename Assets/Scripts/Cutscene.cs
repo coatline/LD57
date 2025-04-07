@@ -102,7 +102,7 @@ public class Cutscene : MonoBehaviour
 
     protected virtual void Finish()
     {
-        print($"Finished cutscene!");
+        //print($"Finished cutscene!");
         active = false;
         DialogueSystem.I.EndConversation();
         DialogueSystem.I.SentenceFinished -= OnSentenceFinished;
