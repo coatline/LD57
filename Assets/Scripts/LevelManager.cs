@@ -18,21 +18,12 @@ public class LevelManager : Singleton<LevelManager>
 
         PlayerController = Instantiate(playerPrefab);
         PlayerController.transform.GetChild(0).position = spawnPosition;
-
-        Vector3 wellivatorEuler = _levelGenerator.Wellivator.transform.eulerAngles;
-
-
-        //PlayerController.transform.GetChild(0).rotation = Quaternion.LookRotation(_levelGenerator.Wellivator.transform.position + _levelGenerator.Wellivator.transform.forward, Vector3.up);
-        //PlayerController.transform.GetChild(0).rotation = Quaternion.Euler(0, PlayerController.transform.GetChild(0).eulerAngles.y, 0);
-        PlayerController.transform.GetChild(0).LookAt(new Vector3(_levelGenerator.Wellivator.transform.position.x, transform.position.y, _levelGenerator.Wellivator.transform.position.z) + _levelGenerator.Wellivator.transform.forward);
-
-
-        print($"Well y = {_levelGenerator.Wellivator.transform.eulerAngles.y}, player y is now = {PlayerController.transform.GetChild(0).eulerAngles.y}");
     }
 
     private void Start()
     {
         PlayerController.GetComponent<CutscenePlayer>().PlayCutscene(_levelGenerator.Wellivator.GetComponent<LevelIntroCutscene>());
+        PlayerController.transform.GetChild(0).rotation = Quaternion.Euler(0, _levelGenerator.Wellivator.transform.eulerAngles.y + 90, 0);
     }
 
     public void GrabbedGemStone()

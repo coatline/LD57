@@ -27,7 +27,6 @@ public class CutscenePlayer : MonoBehaviour
     {
         currentCutscene.Finished -= CurrentCutscene_Finished;
         player.Enable();
-        print($"Cutscene finished.. now i can move. It hink");
         currentCutscene = null;
     }
 

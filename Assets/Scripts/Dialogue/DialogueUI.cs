@@ -22,6 +22,10 @@ public class DialogueUI : MonoBehaviour
     private void Awake()
     {
         nextCharTimer.Stop();
+
+#if UNITY_EDITOR
+        charDelay /= 4f;
+#endif
     }
 
     public void Hide()
@@ -50,6 +54,7 @@ public class DialogueUI : MonoBehaviour
             visuals.SetActive(true);
             letterbox.Play("Show");
         }
+
 
         charIndex = 0;
         this.toType = toType;

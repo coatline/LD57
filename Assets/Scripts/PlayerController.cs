@@ -22,12 +22,15 @@ public class PlayerController : MonoBehaviour
 
     public void Enable()
     {
+        firstPersonCamera.SetCurrentLookingPosition(new Vector2(firstPersonCamera.transform.eulerAngles.y, 0));
         playerInput.enabled = true;
+        enabled = true;
     }
 
     public void Disable()
     {
         playerInput.enabled = false;
+        enabled = false;
     }
 
     public void OnDrop(InputAction.CallbackContext ctx)
@@ -70,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            lookInputs = ctx.ReadValue<Vector2>() * 25f;
+            lookInputs = ctx.ReadValue<Vector2>() * 35f;
         }
     }
 
@@ -82,6 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        firstPersonCamera.SetInputValues(lookInputs * Time.fixedDeltaTime);
+        if (playerInput.currentControlScheme == "Keyboard&Mouse" == false)
+            firstPersonCamera.SetInputValues(lookInputs * Time.fixedDeltaTime);
     }
 }

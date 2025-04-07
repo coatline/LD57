@@ -105,7 +105,7 @@ MonoBehaviour:
   dialogueText: {fileID: 3800640220199350006}
   letterbox: {fileID: 0}
   visuals: {fileID: 1015778261921080653}
-  charDelay: 0.1
+  charDelay: 0.075
   typeSound: {fileID: 11400000, guid: 9c71555376c9dca438765df284e2205f, type: 2}
 --- !u!1 &3318505456149991264
 GameObject:
