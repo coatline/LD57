@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 207176804ec40864db0deed61b775501, type: 3}
+  - {fileID: 8300000, guid: 52e8750b4b5bce04faa5e8b32a3ffd5b, type: 3}
+  - {fileID: 8300000, guid: 6fa7848b682f79b4db081dec116b05cf, type: 3}
+  - {fileID: 8300000, guid: d341fae86f5a5cb42ba9d48725a8755d, type: 3}
   pitchShiftRange: {x: 0, y: 0}

@@ -16,14 +16,14 @@ public class ScarySoundPlayer : MonoBehaviour
 
     private void Start()
     {
-        player = FindFirstObjectByType<PlayerController>().transform.GetChild(0);
+        player = LevelManager.I.PlayerController.transform.GetChild(0);
     }
 
     void Update()
     {
         if (timer.DecrementIfRunning(Time.deltaTime))
         {
-            SoundPlayer.I.PlaySound(scarySound, player.transform.position + new Vector3(Random.Range(-15f, 15f), Random.Range(-15f, 15f)));
+            SoundPlayer.I.PlaySound(scarySound, player.transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)));
             timer.StartWithInterval(Random.Range(minInterval, maxInterval));
         }
     }

@@ -1,35 +1,37 @@
 using UnityEngine;
 
-public class Wellivator : MonoBehaviour
+public class Wellivator : MonoBehaviour, IInteractable
 {
-    [SerializeField] PlayerController playerPrefab;
-    [SerializeField] float targetBucketY;
     [SerializeField] float animationTime;
     [SerializeField] Transform bucket;
+    [SerializeField] SoundType decendSound;
 
-    IntervalTimer animationTimer;
-    float bucketStartingY;
+    float bucketTargetY;
+
 
     private void Awake()
     {
-        bucketStartingY = bucket.transform.position.y;
-        animationTimer.StartWithInterval(animationTime);
-
-        PlayerController p = Instantiate(playerPrefab);
-        p.transform.GetChild(0).position = new Vector3(bucket.position.x, bucket.position.y + 1, bucket.position.z);
+        bucketTargetY = 0;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (animationTimer.IsRunning == false)
-            return;
+        bucket.transform.position = new Vector3(bucket.transform.position.x, Mathf.MoveTowards(bucket.transform.position.y, bucketTargetY, Time.fixedDeltaTime), bucket.transform.position.z);
+    }
 
-        if (animationTimer.DecrementIfRunning(Time.deltaTime))
-        {
-            animationTimer.Stop();
-            bucket.transform.position = new Vector3(transform.position.x, targetBucketY, transform.position.z);
-        }
-        else
-            bucket.transform.position = new Vector3(bucket.transform.position.x, Mathf.MoveTowards(bucketStartingY, targetBucketY, animationTimer.PercentageComplete), bucket.transform.position.z);
+    public Vector3 GetBucketPosition() => bucket.position;
+
+    public string InteractText => "decend (e)";
+
+    public bool CanInteract(Interactor interactor)
+    {
+        return interactor.ObjectHolder.CurrentItem != null && interactor.ObjectHolder.CurrentItem.name.Contains("Gemstone");
+    }
+
+    public void Interact(Interactor interactor)
+    {
+        SoundPlayer.I.PlaySound(decendSound, transform.position);
+        bucketTargetY = -10;
+        LevelManager.I.CompleteLevel();
     }
 }

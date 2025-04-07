@@ -1,33 +1,39 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CutscenePlayer : MonoBehaviour
 {
-    [SerializeField] string[] conversation;
-    [SerializeField] DialogueSystem dialogueSystem;
-    [SerializeField] Transform character;
+    [SerializeField] InputAction nextAction;
+    [SerializeField] PlayerController player;
 
-    Vector3 targetPosition;
+    Cutscene currentCutscene;
 
-    void Start()
+    private void Awake()
     {
-        dialogueSystem.SentenceStarted += DialogueSystem_SentenceStarted;
-        dialogueSystem.DisplayConversation(conversation);
+        nextAction.started += NextAction_started;
+        nextAction.Enable();
     }
 
-    private void DialogueSystem_SentenceStarted()
+    public void PlayCutscene(Cutscene cutscene)
     {
-        targetPosition.z += 1f;
-        targetPosition.y = 1;
+        currentCutscene = cutscene;
+        currentCutscene.Finished += CurrentCutscene_Finished;
 
-        if (targetPosition.z == 4)
-            SceneFader.I.LoadNewScene("Game");
+        player.Disable();
+        cutscene.Play(player);
     }
 
-    private void Update()
+    private void CurrentCutscene_Finished()
     {
-        character.position = Vector3.MoveTowards(character.position, targetPosition, Time.deltaTime * 3);
+        currentCutscene.Finished -= CurrentCutscene_Finished;
+        player.Enable();
+        print($"Cutscene finished.. now i can move. It hink");
+        currentCutscene = null;
+    }
 
-        if (Input.GetMouseButtonDown(0))
-            dialogueSystem.PressedNext();
+    private void NextAction_started(InputAction.CallbackContext ctx)
+    {
+        if (currentCutscene != null)
+            DialogueSystem.I.PressedNext();
     }
 }

@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetIsSprinting(bool isSprinting)
     {
+        if (this.isSprinting == isSprinting)
+            return;
+
         if (isSprinting)
             targetSpeed = sprintSpeed;
         else

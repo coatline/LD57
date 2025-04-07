@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34,19 +34,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000057601163
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000057601163
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcea5275d937a5949a54209fe945deb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: {fileID: 11400000, guid: 9bf6ab7712e18ef4dabbddeead021bd9, type: 2}
+  firstTimePickupSound: {fileID: 11400000, guid: 4c8b0a1f11aa0274aa73c521f3adb1e9, type: 2}
 --- !u!54 &4257170575919660415
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,6 +143,6 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: ecec4c4d622f4374793c2cd715f36df2, type: 3}

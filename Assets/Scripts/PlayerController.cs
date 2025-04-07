@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform playerCamera;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] FirstPersonInteractor interactor;
+    [SerializeField] ObjectHolder objectHolder;
     [SerializeField] Jumper jumper;
 
     Vector2 lookInputs;
@@ -17,6 +18,22 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void Enable()
+    {
+        playerInput.enabled = true;
+    }
+
+    public void Disable()
+    {
+        playerInput.enabled = false;
+    }
+
+    public void OnDrop(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+            objectHolder.TryDropItem();
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
@@ -53,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            lookInputs = ctx.ReadValue<Vector2>();
+            lookInputs = ctx.ReadValue<Vector2>() * 25f;
         }
     }
 

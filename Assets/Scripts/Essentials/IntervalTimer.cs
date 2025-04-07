@@ -6,7 +6,6 @@ public struct IntervalTimer
 {
     [Tooltip("Time in seconds until elapsed.")]
     public float Interval;
-    [HideInInspector]
     public float Timer;
 
     /// <summary>

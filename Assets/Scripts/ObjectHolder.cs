@@ -3,37 +3,35 @@ using UnityEngine;
 public class ObjectHolder : MonoBehaviour
 {
     [SerializeField] Transform hand;
-    GameObject currentItem;
+    HoldableObject currentObject;
 
-    public void PickupItem(GameObject go)
+    public void PickupItem(HoldableObject holdableObject)
     {
-        if (go.GetComponent<Collider>() != null)
-        {
-            go.GetComponent<Collider>().enabled = false;
-        }
+        if (holdableObject.GetComponent<Rigidbody>() != null)
+            holdableObject.GetComponent<Rigidbody>().isKinematic = true;
 
-        currentItem = go;
+        currentObject = holdableObject;
     }
 
-    public void DropItem()
+    public void TryDropItem()
     {
-        if (currentItem == null)
+        if (currentObject == null)
             return;
 
-        if (currentItem.GetComponent<Collider>() != null)
-        {
-            currentItem.GetComponent<Collider>().enabled = true;
-        }
+        if (currentObject.GetComponent<Rigidbody>() != null)
+            currentObject.GetComponent<Rigidbody>().isKinematic = false;
 
-        currentItem = null;
+        currentObject = null;
     }
 
     private void Update()
     {
-        if (currentItem == null)
+        if (currentObject == null)
             return;
 
-        currentItem.transform.position = hand.position;
-        currentItem.transform.rotation = hand.rotation;
+        currentObject.transform.SetPositionAndRotation(hand.position, hand.rotation);
     }
+
+    public HoldableObject CurrentItem => currentObject;
+    public bool HandEmpty => currentObject == null;
 }

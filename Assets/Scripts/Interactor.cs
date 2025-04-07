@@ -11,7 +11,7 @@ public class Interactor : MonoBehaviour
 
     public void TryInteract()
     {
-        if (currentTarget != null && currentTarget.CanInteract())
+        if (currentTarget != null && currentTarget.CanInteract(this))
             currentTarget.Interact(this);
 
         currentTarget = null;

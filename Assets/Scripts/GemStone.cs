@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class GemStone : MonoBehaviour, IInteractable
+public class GemStone : HoldableObject
 {
-    public bool CanInteract() => true;
+    [SerializeField] SoundType firstTimePickupSound;
 
-    public void Interact(Interactor interactor)
+    protected override void FirstTimeBeingPickedUp()
     {
-        interactor.ObjectHolder.PickupItem(gameObject);
+        SoundPlayer.I.PlaySound(firstTimePickupSound, transform.position);
         LevelManager.I.GrabbedGemStone();
+        base.FirstTimeBeingPickedUp();
     }
-
-    public string InteractText => "take";
 }

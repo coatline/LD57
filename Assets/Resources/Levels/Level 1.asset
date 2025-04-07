@@ -16,7 +16,9 @@ MonoBehaviour:
   floorPrefab: {fileID: 603861528499356766, guid: d1672196dfa7ef64d87c3e87d858c38e, type: 3}
   ceilingPrefab: {fileID: 603861528499356766, guid: f5c0e0117f686ff4592d237ff620dcfc, type: 3}
   torchPrefab: {fileID: 7718079595315270967, guid: 7988277f135c1814b897f16176413f63, type: 3}
-  maxIterations: 200
-  maxDistance: 10
+  wellFloorPrefab: {fileID: 7114307806975546495, guid: e8d256929f4f4274581c8d91ac96a1ad, type: 3}
+  minDistanceFromStart: 8
+  maxDistanceFromStart: 10
+  maxIterations: 500
   enemies: 10
   size: 100
