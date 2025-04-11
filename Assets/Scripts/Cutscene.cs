@@ -10,7 +10,6 @@ public class Cutscene : MonoBehaviour
 
     IntervalTimer frameDelayTimer;
     IntervalTimer walkTimer;
-    int dialogueLinesToRead;
     int currentFrameIndex;
 
     bool waitingForDialogue;
@@ -77,7 +76,6 @@ public class Cutscene : MonoBehaviour
         //print($"Frame started.. {currentFrameIndex}/{frames.Length - 1}");
         frameDelayTimer.StartWithInterval(CurrentFrame.startDelay);
         waitingForFrameDelay = true;
-        //dialogueLinesToRead = CurrentFrame.dialogueLines;
 
         if (currentFrameIndex > 0)
             DialogueSystem.I.StartNextSentence();
@@ -121,12 +119,4 @@ struct CutsceneFrame
     public Vector2 moveDirection;
     public bool jump;
     public bool sprint;
-}
-public enum DialogueBehavior
-{
-    none,
-    startAfterDelay,
-    startBeforeDelay,
-    startAfterMovement,
-    startAndWaitAfterMovement,
 }
